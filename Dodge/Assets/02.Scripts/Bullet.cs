@@ -1,40 +1,40 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // ÀÌµ¿¿¡ »ç¿ëÇÒ ¸®Áöµå¹Ùµğ ÄÄÆ÷³ÍÆ®
+    // ì´ë™ì— ì‚¬ìš©í•  ë¦¬ì§€ë“œë°”ë”” ì»´í¬ë„ŒíŠ¸
     private Rigidbody bulletRigidbody;
-    // Åº¾Ë ÀÌµ¿ ¼Ó·Â
+    // íƒ„ì•Œ ì´ë™ ì†ë ¥
     public float speed = 8f;
 
     // Start is called before the first frame update
     void Start()
     {
-        // °ÔÀÓ ¿ÀºêÁ§Æ®¿¡¼­ Rigidbody ÄÄÆ÷³ÍÆ®¸¦
-        // Ã£¾Æ bulletRigidbody¿¡ ÇÒ´ç
+        // ê²Œì„ ì˜¤ë¸Œì íŠ¸ì—ì„œ Rigidbody ì»´í¬ë„ŒíŠ¸ë¥¼
+        // ì°¾ì•„ bulletRigidbodyì— í• ë‹¹
         bulletRigidbody = GetComponent<Rigidbody>();
 
-        // ¸®Áöµå¹ÙµğÀÇ ¼Óµµ = ¾ÕÂÊ ¹æÇâ * ÀÌµ¿ ¼Ó·Â;
+        // ë¦¬ì§€ë“œë°”ë””ì˜ ì†ë„ = ì•ìª½ ë°©í–¥ * ì´ë™ ì†ë ¥;
         bulletRigidbody.velocity = transform.forward * speed;
 
         Destroy(gameObject, 3f);
     }
 
-    // Æ®¸®°Å Ãæµ¹ ½Ã ÀÚµ¿À¸·Î ½ÇÇàµÇ´Â ¸Ş¼­µå
+    // íŠ¸ë¦¬ê±° ì¶©ëŒ ì‹œ ìë™ìœ¼ë¡œ ì‹¤í–‰ë˜ëŠ” ë©”ì„œë“œ
     private void OnTriggerEnter(Collider other)
     {
-        // Ãæµ¹ÇÑ »ó´ë¹æ °ÔÀÓ ¿ÀºêÁ§Æ®°¡ Player ÅÂ±×¸¦ °¡Á³³ª¿ä?
+        // ì¶©ëŒí•œ ìƒëŒ€ë°© ê²Œì„ ì˜¤ë¸Œì íŠ¸ê°€ Player íƒœê·¸ë¥¼ ê°€ì¡Œë‚˜ìš”?
         if (other.tag == "Player")
         {
-            // »ó´ë¹æ(Ãæµ¹ÇÑ) °ÔÀÓ ¿ÀºêÁ§Æ®¿¡¼­ PlayerController ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
+            // ìƒëŒ€ë°©(ì¶©ëŒí•œ) ê²Œì„ ì˜¤ë¸Œì íŠ¸ì—ì„œ PlayerController ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
             PlayerController playerController = other.GetComponent<PlayerController>();
 
-            // »ó´ë¹æÀ¸·ÎºÎÅÍ PlayerController ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿À´Âµ¥ ¼º°øÇß´Ù¸é
+            // ìƒëŒ€ë°©ìœ¼ë¡œë¶€í„° PlayerController ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ”ë° ì„±ê³µí–ˆë‹¤ë©´
             if (playerController != null)
             {
-                // playerController ÄÄÆ÷³ÍÆ®ÀÇ Die() ¸Ş¼­µå ½ÇÇà
+                // playerController ì»´í¬ë„ŒíŠ¸ì˜ Die() ë©”ì„œë“œ ì‹¤í–‰
                 playerController.Die();
             }
         }
